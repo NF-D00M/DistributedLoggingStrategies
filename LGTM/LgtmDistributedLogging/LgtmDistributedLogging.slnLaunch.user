@@ -1,0 +1,23 @@
+[
+  {
+    "Name": "LGTM-Start",
+    "Projects": [
+      {
+        "Path": "LgtmDistributedLogging.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\ServiceA\\ServiceA.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\ServiceB\\ServiceB.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\ServiceC\\ServiceC.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

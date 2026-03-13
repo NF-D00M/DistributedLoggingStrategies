@@ -1,51 +1,43 @@
 using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Sinks.Grafana.Loki;
+using System.Diagnostics;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Service Identity
-const string serviceName = "Lgtm.Orchestrator";
+const string serviceName = "Lgtm.ServiceB";
 
 // Serilog sends logs directly to Loki (port: 3100)
 Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
-    .WriteTo.Console()
+    .WriteTo.Console(outputTemplate:
+        "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} [Trace: {TraceId}] [Span: {SpanId}]{NewLine}{Exception}")
     .WriteTo.GrafanaLoki("http://localhost:3100", new[] {
         new LokiLabel { Key = "service", Value = serviceName }
     })
     .CreateLogger();
+
 builder.Host.UseSerilog();
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Configure Services
-builder.Services.AddHttpClient("ServiceA", c => c.BaseAddress = new Uri("http://localhost:5001/"));
-builder.Services.AddHttpClient("ServiceB", c => c.BaseAddress = new Uri("http://localhost:5002/"));
-builder.Services.AddHttpClient("ServiceC", c => c.BaseAddress = new Uri("http://localhost:5003/"));
 
 // OpenTelemetry Tracing & Metrics
 builder.Services.AddOpenTelemetry()
-    .ConfigureResource(resource => resource.AddService(serviceName))
-    .WithTracing(tracing => tracing
+    .ConfigureResource(r => r.AddService("Lgtm.ServiceB"))
+    .WithTracing(t => t
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
-        //.AddConsoleExporter() 
-        .AddOtlpExporter(opt =>
-        {
+        .AddOtlpExporter(opt => {
             opt.Endpoint = new Uri("http://localhost:4317");
             opt.Protocol = OtlpExportProtocol.Grpc;
         }))
-    .WithMetrics(static metrics => metrics
+    .WithMetrics(metrics => metrics
         .AddAspNetCoreInstrumentation() // Tracks request rates, errors, and durations
         .AddHttpClientInstrumentation() // Tracks downstream calls (e.g. Orchestrator -> Service A)
         .AddRuntimeInstrumentation()    // Tracks .NET GC, Memory, and ThreadPool
-        //.AddConsoleExporter()
         .AddOtlpExporter(opt => {
             opt.Endpoint = new Uri("http://localhost:9090/api/v1/otlp/v1/metrics");
             opt.Protocol = OtlpExportProtocol.HttpProtobuf;
@@ -53,26 +45,13 @@ builder.Services.AddOpenTelemetry()
 
 WebApplication app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.MapGet("serviceB/data", (ILogger<Program> logger) => {
+    logger.LogInformation("Service B processing request");
 
-app.MapControllers();
+    return Results.Ok(new
+    {
+        TraceId = Activity.Current?.TraceId.ToString()
+    });
+});
 
-
-// Start application
-try
-{
-    Log.Information("Starting Lgtm.Orchestrator up");
-    app.Run();
-}
-catch (Exception ex)
-{
-    Log.Fatal(ex, "Application start-up failed");
-}
-finally
-{
-    Log.CloseAndFlush();
-}
+app.Run("http://localhost:5002"); 
