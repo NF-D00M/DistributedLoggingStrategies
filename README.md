@@ -71,7 +71,7 @@ Once all services are running, access the local dashboard at:
 
 Loki
 
-![Distibuted Tracing](c:\Workspace\DistributedLoggingStrategies\LGTM\LgtmDistributedLogging\Images\loki-distributed-tracing.png "This is the distribution of a trace id across services")
+![Distibuted Tracing](DistributedLoggingStrategies\LGTM\LgtmDistributedLogging\Images\loki-distributed-tracing.png "This is the distribution of a trace id across services")
 
 Tempo
 
