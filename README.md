@@ -47,16 +47,16 @@ Before running the application, you must ensure the following components are ins
 ## Run Service
 
 ### Loki
-cd C:\OtelStack\loki
-.\loki-windows-amd64.exe --config.file=loki-config.yaml
+Switch directory: `cd C:\OtelStack\loki`
+Run service: `.\loki-windows-amd64.exe --config.file=loki-config.yaml`
 
 ### Tempo
-cd C:\OtelStack\tempo
-./tempo --config.file=tempo-config.yaml
+Switch directory: `cd C:\OtelStack\tempo`
+Run service: `./tempo --config.file=tempo-config.yaml`
 
 ### Prometheus
-cd C:\OtelStack\prometheus\prometheus-3.10.0.windows-amd64
-.\prometheus.exe --config.file=prometheus.yml --web.enable-otlp-receiver --enable-feature=remote-write-receiver
+Switch directory: `cd C:\OtelStack\prometheus\prometheus-3.10.0.windows-amd64`
+Run service: `.\prometheus.exe --config.file=prometheus.yml --web.enable-otlp-receiver --enable-feature=remote-write-receiver`
 
 Once all services are running, access the local dashboard at:
-http://localhost:3000/
+`http://localhost:3000/`
