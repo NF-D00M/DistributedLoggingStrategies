@@ -70,7 +70,7 @@ Run service: `./tempo --config.file=tempo-config.yaml`
 ### Prometheus
 Switch directory: `cd C:\OtelStack\prometheus\prometheus-3.10.0.windows-amd64`
   
-Run service: `.\prometheus.exe --config.file=prometheus.yml --web.enable-otlp-receiver --enable-feature=remote-write-receiver`
+Run service: `.\prometheus.exe --config.file=prometheus.yml --web.enable-otlp-receiver --web.enable-remote-write-receiver`
 
 Once all services are running, access the local dashboard at:
 
@@ -92,7 +92,7 @@ Query logs or filter by key
 
 ## Tempo
 
-Monitor end-to-end service requests by passing trace ids through HTTP headers.
+Trace end-to-end service requests by passing trace ids through HTTP headers.
 
 ![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/tempo-distributed-tracing.png)
 
@@ -102,7 +102,24 @@ Monitor and tailor your dashboard to include any of the 365 available metrics
 
 ![Metrics](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-metrics.png)
 
-## Importing Exisiting Dashboards
+## Prometheus & Tempo
+
+Monitor spans
+
+Tempo
+
+![Spans Tempo](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/tempo-monitor-spans.png)
+
+Prometheus
+
+![Spans Prometheus](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-monitor-spans.png)
+
+Service Graph
+
+![Monitor spans](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/service-graph.png)
+
+
+## Import Exisiting Dashboards
 
 Import existing dashboards from the Grafana community
 
@@ -110,3 +127,6 @@ Import existing dashboards from the Grafana community
 ![Imported Dashboard](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/imported-dashboard.png)
 
 ## Creating Custom Dashboards
+
+## Prometheus and Tempo Service Graph
+
