@@ -71,7 +71,7 @@ Once all services are running, access the local dashboard at:
 
 Loki
 
-![Distributed Tracing](DistributedLoggingStrategies/LGTM/LgtmDistributedLogging/Images/loki-distributed-tracing.png)
+![Distributed Tracing](https://raw.githubusercontent.com/NF-D00M/DistributedLoggingStrategies/master/DistributedLoggingStrategies/LGTM/LgtmDistributedLogging/Images/loki-distributed-tracing.png)
 
 Tempo
 
