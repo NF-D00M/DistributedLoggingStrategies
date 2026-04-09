@@ -123,10 +123,14 @@ Service Graph
 
 Import existing dashboards from the Grafana community
 
+.NET ASP (ID:19924)
 
 ![Imported Dashboard](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/imported-dashboard.png)
 
 ## Creating Custom Dashboards
 
-## Prometheus and Tempo Service Graph
+Golden signals
+
+![Golden Signals](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/golden-signals.png)
+
 
