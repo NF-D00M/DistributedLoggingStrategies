@@ -69,13 +69,24 @@ Once all services are running, access the local dashboard at:
 
 # Dashboards
 
-Loki
+## Loki
 
-![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-distributed-tracing.png)
+View logs from distributed systems in one location
 
-Tempo
+![Centralised Logging](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-centralised-logging.png)
 
-Prometheus
+Query logs
 
-Importing Exisiting Dashboards
+![Structured Logging](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-structured-logging.png)
 
+## Tempo
+
+Monitor end-to-end service requests by passing trace ids through HTTP headers.
+
+![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/tempo-distributed-tracing.png)
+
+## Prometheus
+
+## Importing Exisiting Dashboards
+
+## Creating Custom Dashboards
