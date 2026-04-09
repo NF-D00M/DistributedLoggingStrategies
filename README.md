@@ -64,3 +64,18 @@ Run service: `.\prometheus.exe --config.file=prometheus.yml --web.enable-otlp-re
 Once all services are running, access the local dashboard at:
 
 `http://localhost:3000/`
+
+---
+
+# Dashboards
+
+Loki
+
+![Distibuted Tracing](c:\Workspace\DistributedLoggingStrategies\LGTM\LgtmDistributedLogging\Images\loki-distributed-tracing.png "This is the distribution of a trace id across services")
+
+Tempo
+
+Prometheus
+
+Importing Exisiting Dashboards
+
