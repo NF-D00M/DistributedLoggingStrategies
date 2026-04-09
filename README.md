@@ -24,7 +24,7 @@ In a microservice environment, understanding the journey of a single request is 
 
 ## Prerequisites
 
-Before running the application, you must ensure the following components are installed and configured. It is highly recommended to use **Docker** with **Hyper-V** or **WSL2** isolation for consistent environment management.
+Before running the application, you must ensure the following components are installed and configured. 
 
 ### 1. Grafana
 * **Role:** The visualisation and dashboarding engine.
@@ -42,9 +42,20 @@ Before running the application, you must ensure the following components are ins
 * **Role:** Metrics collection and storage.
 * **Configuration:** Define your scrape jobs in `prometheus.yml`. Ensure the application or the OTel Collector provides a `/metrics` endpoint for Prometheus to poll.
 
+--- 
+
+# Example C# Implementation
+
+See file: `LgtmDistributedLogging/Program.cs` to view Open Telemetry exporting
+
 ---
 
 ## Run Service
+
+### Grafana
+Switch directory: `cd C:\Program Files\GrafanaLabs\grafana\bin`
+
+Run service: `C:\Program Files\GrafanaLabs\grafana\bin`
 
 ### Loki
 Switch directory: `cd C:\OtelStack\loki`
@@ -88,9 +99,14 @@ Monitor end-to-end service requests by passing trace ids through HTTP headers.
 ## Prometheus
 
 Monitor and tailor your dashboard to include any of the 365 available metrics
- 
-![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-metrics.png)
+
+![Metrics](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-metrics.png)
 
 ## Importing Exisiting Dashboards
+
+Import existing dashboards from the Grafana community
+
+
+![Imported Dashboard](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/imported-dashboard.png)
 
 ## Creating Custom Dashboards
