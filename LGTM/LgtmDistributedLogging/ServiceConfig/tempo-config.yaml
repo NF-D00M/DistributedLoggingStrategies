@@ -1,0 +1,36 @@
+server:
+  http_listen_port: 3200
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: "0.0.0.0:4317"
+        http:
+          endpoint: "0.0.0.0:4318"
+
+# 1. Update this section
+metrics_generator:
+  processor:
+    service_graphs: {} # Remove 'enabled: true'
+    span_metrics: {}    # Remove 'enabled: true'
+    local_blocks:           # <--- Add this block
+      flush_to_storage: true # Allows drilldown on historical data, not just live spans
+  storage:
+    path: ./data/tempo/generator # This is the base path for metrics blocks
+    remote_write:
+      - url: "http://localhost:9090/api/v1/write"
+        send_exemplars: true
+
+# 2. This section explicitly enables them
+overrides:
+  metrics_generator_processors: [service-graphs, span-metrics, local-blocks]
+
+storage:
+  trace:
+    backend: local
+    local:
+      path: ./data/tempo
+    wal:
+      path: ./data/tempo/wal

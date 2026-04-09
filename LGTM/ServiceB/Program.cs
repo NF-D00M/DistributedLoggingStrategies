@@ -11,6 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Service Identity
 const string serviceName = "Lgtm.ServiceB";
+const string serviceInstanceId = "localhost";
 
 // Serilog sends logs directly to Loki (port: 3100)
 Log.Logger = new LoggerConfiguration()
@@ -26,7 +27,8 @@ builder.Host.UseSerilog();
 
 // OpenTelemetry Tracing & Metrics
 builder.Services.AddOpenTelemetry()
-    .ConfigureResource(r => r.AddService("Lgtm.ServiceB"))
+    .ConfigureResource(resource => resource
+        .AddService(serviceName, serviceInstanceId: serviceInstanceId)) // This fills the 'service_instance_id' label
     .WithTracing(t => t
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
