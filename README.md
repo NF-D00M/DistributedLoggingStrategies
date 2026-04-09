@@ -75,7 +75,7 @@ View logs from distributed systems in one location
 
 ![Centralised Logging](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-centralised-logging.png)
 
-Query logs
+Query logs or filter by key
 
 ![Structured Logging](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-structured-logging.png)
 
@@ -86,6 +86,10 @@ Monitor end-to-end service requests by passing trace ids through HTTP headers.
 ![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/tempo-distributed-tracing.png)
 
 ## Prometheus
+
+Monitor and tailor your dashboard to include any of the 365 available metrics
+ 
+![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-metrics.png)
 
 ## Importing Exisiting Dashboards
 
