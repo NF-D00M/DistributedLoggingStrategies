@@ -1,16 +1,16 @@
 # DistributedLoggingStrategies
 
-This application serves as a reference for a modern, agnostic observability stack. By leveraging the **OpenTelemetry (OTel)** standard, the system decouples telemetry collection from storage, ensuring a flexible and scalable architecture.
+This application serves as a reference for a modern and agnostic observability stack. By leveraging the **OpenTelemetry (OTel)** standard, the system decouples telemetry collection from storage, ensuring a flexible and scalable architecture.
 
 ---
 
 ## Introduction: The LGTM Stack & OpenTelemetry
 
-The observability suite is built around the **LGTM** (Loki, Grafana, Tempo, Mimir/Prometheus) stack. Data is unified through **Grafana**, which acts as a centralised visualisation layer for three critical data types:
+The observability suite is built around the **LGTM** (Loki, Grafana, Tempo, Mimir/Prometheus) stack. Data is unified through **Grafana**, which acts as a centralised visualisation layer for three critical data services:
 
 ### 1. Centralised & Structured Logging (Loki)
 This application utilises **Structured Logging** (JSON format) to attach rich metadata to every event.
-* **Queryable Intelligence:** Using **Loki**, logs are indexed by labels (e.g., `service_id`, `environment`). This allows for rapid filtering using LogQL in Grafana.
+* **Queryable Intelligence:** Using **Loki**, logs are indexed by labels (`service_id`, `environment`). This allows for rapid filtering using LogQL in Grafana.
 
 ### 2. Time-Series Metrics (Prometheus)
 **Prometheus** tracks the health and performance of the application over time.
@@ -36,7 +36,7 @@ Before running the application, you must ensure the following components are ins
 
 ### 3. Tempo
 * **Role:** Distributed tracing storage.
-* **Configuration:** Configure the application to emit OTLP traces. Ensure Tempo is listening for incoming gRPC or HTTP traffic (typically on port `4317` or `4318`).
+* **Configuration:** Configure the application to emit OTLP traces. Ensure Tempo is listening for incoming gRPC or HTTP traffic (ports `4317` or `4318`).
 
 ### 4. Prometheus
 * **Role:** Metrics collection and storage.
@@ -44,9 +44,13 @@ Before running the application, you must ensure the following components are ins
 
 --- 
 
-# Example C# Implementation
+## Example C# Implementation
 
 See file: `LgtmDistributedLogging/Program.cs` to view Open Telemetry exporting.
+
+## Example Configuraion of Data Services 
+
+See dir: `ServiceConfig` to view Loki, Tempo and Prometheus configruation.
 
 ---
 
@@ -100,7 +104,7 @@ Query logs or filter by key
 
 Trace end-to-end service requests by passing trace ids through HTTP headers.
 
-* **Visualising Request Flow:** Tempo sees the exact path a single request takes as it hops through a service, revealing exactly how long the service spent waiting on another service versus its own internal processing.
+* **Visualising Request Flow:** Tempo sees the exact path a single request takes as it hops through a service, revealing exactly how long the service spent waiting on another service, versus its own internal processing.
 
 * **Pinpointing Latency Bottlenecks:** Break down a trace into individual span, to identify the specific method, database query, or downstream API call causing a delay, rather than just knowing the entire service is slow.
 
@@ -112,7 +116,7 @@ Trace end-to-end service requests by passing trace ids through HTTP headers.
 
 Monitor and tailor your dashboard to include any of the 365 available metrics
 
-* **Dimensional Data Model:** Prometheus uses key-value pairs called labels to categorise metrics, to disect services and compare performance or group error rates by specific endpoints.
+* **Dimensional Data Model:** Prometheus uses key-value pairs called labels to categorise metrics to disect services and compare performance or group error rates by specific endpoints.
 
 * **Pull-Based Scalability:** Prometheus scrapes metrics at regular intervals, which prevents your services from being overwhelmed by monitoring traffic during high-load events or retry storms.
 
@@ -122,7 +126,7 @@ Monitor and tailor your dashboard to include any of the 365 available metrics
 
 ## Prometheus & Tempo
 
-Monitor spans with a summarise and drill down relationship between Prometheus and Tempo 
+Monitor spans with a summaries and relationships between Prometheus and Tempo data.
 
 ### Tempo
 
@@ -132,13 +136,13 @@ Monitor spans with a summarise and drill down relationship between Prometheus an
 
 ### Prometheus
 
-* **Prometheus (Aggregated Metrics):** Prometheus tracks spans by aggregating them into high-level metrics (via Span Metrics), allowing visibility over RED signals—Rate, Errors, and Duration—for every service and operation at scale without needing to examine individual traces.
+* **Prometheus (Aggregated Metrics):** Prometheus tracks spans by aggregating them into high-level metrics (via Span Metrics), allowing visibility over RED signals (Rate, Errors, and Duration) for every service and operation at scale without the need to examine individual traces.
 
 ![Spans Prometheus](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-monitor-spans.png)
 
 ### Service Graph
 
-* **Service Graph:** This feature dynamically maps the topography of your system by analysing trace data to visualise how services interact, automatically calculating request rates and latencies between them to can see at a glance where traffic is bottlenecking or failing in the communication chain.
+* **Service Graph:** This feature dynamically maps the topography of your system by analysing trace data to visualise how services interact, automatically calculating request rates and latencies between them. View these performance metrics at a glacne to identify where traffic is bottlenecking or failing in the communication chain.
 
 ![Monitor spans](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/service-graph.png)
 
@@ -159,9 +163,9 @@ Import existing dashboards from the Grafana community
 
 The Four Golden Signals are the essential metrics for monitoring any user-facing distributed system. They provide a high-level view of system health and are the first things to check during an incident.
 
-* **Latency:** The time it takes to service a request, measured in milliseconds. It is critical to track the latency of successful requests separately from failed requests to ensure error-related fast-failures don't mask slow performance.
+* **Latency:** The time it takes to service a request measured in milliseconds. It is critical to track the latency of successful requests separately from failed requests to ensure error-related fast-failures don't mask slow performance.
 
-* **Traffic:** A measure of how much demand is being placed on your system, typically tracked as the number of HTTP requests per second or concurrent active sessions across your services.
+* **Traffic:** A measure of how much demand is being placed on your system, typically tracked by the number of HTTP requests per second or concurrent active sessions across services.
 
 * **Errors:** The rate of requests that fail, either explicitly (HTTP 500s), implicitly ("success" response with the wrong data), or by policy (a request that takes over 10 seconds and is terminated).
 
