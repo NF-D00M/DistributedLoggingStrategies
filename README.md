@@ -157,13 +157,17 @@ Import existing dashboards from the Grafana community
 
 ![Imported Dashboard](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/imported-dashboard.png)
 
+Import dashboard from json
+
+* Locate the json file: `Dashboards\golden-signals-dashboard.json` to import the entire suite of visualisations that analyse the Golden Signals of a .NET application
+
 ## Creating Custom Dashboards
 
 ### Golden signals
 
 The Four Golden Signals are the essential metrics for monitoring any user-facing distributed system. They provide a high-level view of system health and are the first things to check during an incident.
 
-* **Latency:** The time it takes to service a request measured in milliseconds. It is critical to track the latency of successful requests separately from failed requests to ensure error-related fast-failures don't mask slow performance.
+* **Latency:** The time it takes to service a request measured in milliseconds. It is critical to track the latency of successful requests separately from failed requests to ensure error-related fast-failures don't mask slow performance. 
 
 * **Traffic:** A measure of how much demand is being placed on your system, typically tracked by the number of HTTP requests per second or concurrent active sessions across services.
 
@@ -172,5 +176,7 @@ The Four Golden Signals are the essential metrics for monitoring any user-facing
 * **Saturation:** A measure of how full a service is, highlighting the most constrained resources (CPU, memory, or thread pools) and indicating at what point performance will begin to degrade as the system reaches its maximum capacity.
 
 ![Golden Signals](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/golden-signals.png)
+
+
 
 
