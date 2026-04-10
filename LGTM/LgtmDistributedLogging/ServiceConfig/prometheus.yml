@@ -1,9 +1,6 @@
-# my global config
 global:
   scrape_interval: 15s 
   evaluation_interval: 15s 
-
-# REMOVE the remote_write_receiver: enabled: true block entirely
 
 alerting:
   alertmanagers:
