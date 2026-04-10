@@ -84,15 +84,15 @@ Once all services are running, access Grafana:
 
 View logs from distributed systems in one location
 
-* Correlation via Shared Labels: Loki uses the same metadata labels as Prometheus, allowing you to jump instantly from a metric spike (e.g., high latency in Lgtm.ServiceC) to the specific logs for that service without re-filtering.
+* **Correlation via Shared Labels:** Loki uses the same metadata labels as Prometheus to navigate instantly from a metric spike (high latency in Lgtm.ServiceC) to the specific logs for that service without re-filtering.
 
-* Unified Trace ID Stitching: By searching for a single TraceId, you can view an interleaved, chronological timeline of logs from all four services, making it easy to track how a request traveled (and where it failed) across your distributed architecture.
+* **Unified Trace ID Stitching:** By searching for a single TraceId chronological timelines of logs from all services become available, making it easy to track how a request traveled (and where it failed) across distributed architecture.
 
 ![Centralised Logging](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-centralised-logging.png)
 
 Query logs or filter by key
 
-* Log-to-Metric Power: Using LogQL, you can transform raw text into real-time metrics on the fly, such as counting specific error strings or calculating request rates from logs when formal instrumentation is missing. 
+* **Log-to-Metric Power:** Using LogQL queries transform raw text into real-time metrics on the fly, such as counting specific error strings or calculating request rates from logs. 
 
 ![Structured Logging](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/loki-structured-logging.png)
 
@@ -100,11 +100,11 @@ Query logs or filter by key
 
 Trace end-to-end service requests by passing trace ids through HTTP headers.
 
-* Visualising Request Flow: Tempo allows you to see the exact path a single request takes as it hops through your .NET services, revealing exactly how long the Orchestrator spent waiting on ServiceC versus its own internal processing.
+* **Visualising Request Flow:** Tempo sees the exact path a single request takes as it hops through a service, revealing exactly how long the service spent waiting on another service versus its own internal processing.
 
-* Pinpointing Latency Bottlenecks: By breaking down a trace into individual "spans," you can identify the specific method, database query, or downstream API call causing a delay, rather than just knowing the entire service is "slow."
+* **Pinpointing Latency Bottlenecks:** Break down a trace into individual span, to identify the specific method, database query, or downstream API call causing a delay, rather than just knowing the entire service is slow.
 
-* Root Cause Correlation: Tempo acts as the connective tissue of the LGTM stack, allowing you to click a span to see the exact Loki logs or Prometheus metrics associated with that specific operation, eliminating manual searching during an incident.
+* **Root Cause Correlation:** Tempo acts as the connective tissue of the LGTM stack by clicking a span to see the exact Loki logs or Prometheus metrics associated with that specific operation, which eliminates manual searching during an incident.
 
 ![Distributed Tracing](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/tempo-distributed-tracing.png)
 
@@ -112,11 +112,11 @@ Trace end-to-end service requests by passing trace ids through HTTP headers.
 
 Monitor and tailor your dashboard to include any of the 365 available metrics
 
-* Dimensional Data Model: Prometheus uses key-value pairs called labels to categorise metrics, allowing you to slice and dice data across your four services to compare performance or group error rates by specific endpoints.
+* **Dimensional Data Model:** Prometheus uses key-value pairs called labels to categorise metrics, to disect services and compare performance or group error rates by specific endpoints.
 
-* Pull-Based Scalability: Unlike traditional systems that push data, Prometheus "scrapes" metrics at regular intervals, which prevents your services from being overwhelmed by monitoring traffic during high-load events or "retry storms."
+* **Pull-Based Scalability:** Prometheus scrapes metrics at regular intervals, which prevents your services from being overwhelmed by monitoring traffic during high-load events or retry storms.
 
-* Proactive Alerting: With PromQL, you can define complex mathematical thresholds (like "Alert if P95 latency is > 2s for 5 minutes") that trigger notifications before a minor saturation issue turns into a total system outage.
+* **Proactive Alerting:** Define complex mathematical thresholds ("Alert if P95 latency is > 2s for 5 minutes) that trigger notifications before a minor saturation issue turns into a total system outage.
 
 ![Metrics](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-metrics.png)
 
@@ -124,21 +124,21 @@ Monitor and tailor your dashboard to include any of the 365 available metrics
 
 Monitor spans with a summarise and drill down relationship between Prometheus and Tempo 
 
-Tempo
+### Tempo
 
-* Tempo (Individual Detail): Tempo stores the full, raw trace data for those spans, enabling you to drill down into a specific request to see the exact sequence of events, parent-child relationships, and timing of every internal hop across your distributed system.
+* **Tempo (Individual Detail):** Tempo stores the full raw trace data for spans, enabling specific request analsyis to see the exact sequence of events, parent-child relationships, and timing of every internal hop across a distributed system.
 
 ![Spans Tempo](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/tempo-monitor-spans.png)
 
-Prometheus
+### Prometheus
 
-* Prometheus (Aggregated Metrics): Prometheus tracks spans by aggregating them into high-level metrics (via Span Metrics), allowing you to see the RED signals—Rate, Errors, and Duration—for every service and operation at scale without needing to examine individual traces.
+* **Prometheus (Aggregated Metrics):** Prometheus tracks spans by aggregating them into high-level metrics (via Span Metrics), allowing visibility over RED signals—Rate, Errors, and Duration—for every service and operation at scale without needing to examine individual traces.
 
 ![Spans Prometheus](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/prometheus-monitor-spans.png)
 
-Service Graph
+### Service Graph
 
-* Service Graph: This feature dynamically maps the "topography" of your system by analysing trace data to visualise how services interact, automatically calculating request rates and latencies between them so you can see at a glance where traffic is bottlenecking or failing in the communication chain.
+* **Service Graph:** This feature dynamically maps the topography of your system by analysing trace data to visualise how services interact, automatically calculating request rates and latencies between them to can see at a glance where traffic is bottlenecking or failing in the communication chain.
 
 ![Monitor spans](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/service-graph.png)
 
@@ -147,7 +147,7 @@ Service Graph
 
 Import existing dashboards from the Grafana community
 
-* Instant Expert Visualisation: Importing dashboards from the Grafana community allows you to leverage pre-built, battle-tested templates using unique Dashboard IDs, instantly providing professional-grade visualisations for common tools like the LGTM stack or .NET runtimes without having to build every panel from scratch.
+* **Instant Expert Visualisation:** Importing dashboards from the Grafana community leverages pre-built, battle-tested templates using unique Dashboard IDs. This instantly provides professional-grade visualisations for common tools in the LGTM stack or .NET runtimes without having to build every panel from scratch.
 
 .NET ASP (ID:19924)
 
@@ -155,17 +155,17 @@ Import existing dashboards from the Grafana community
 
 ## Creating Custom Dashboards
 
-Golden signals
+### Golden signals
 
-The Four Golden Signals are the essential metrics for monitoring any user-facing distributed system. They provide a high-level view of system health and are the first things you should check during an incident.
+The Four Golden Signals are the essential metrics for monitoring any user-facing distributed system. They provide a high-level view of system health and are the first things to check during an incident.
 
-* Latency: The time it takes to service a request, measured in milliseconds; it is critical to track the latency of successful requests separately from failed requests to ensure error-related "fast failures" don't mask slow performance.
+* **Latency:** The time it takes to service a request, measured in milliseconds. It is critical to track the latency of successful requests separately from failed requests to ensure error-related fast-failures don't mask slow performance.
 
-* Traffic: A measure of how much demand is being placed on your system, typically tracked as the number of HTTP requests per second or concurrent active sessions across your services.
+* **Traffic:** A measure of how much demand is being placed on your system, typically tracked as the number of HTTP requests per second or concurrent active sessions across your services.
 
-* Errors: The rate of requests that fail, either explicitly (e.g., HTTP 500s), implicitly (e.g., a "success" response with the wrong data), or by policy (e.g., a request that takes over 10 seconds and is terminated).
+* **Errors:** The rate of requests that fail, either explicitly (HTTP 500s), implicitly ("success" response with the wrong data), or by policy (a request that takes over 10 seconds and is terminated).
 
-* Saturation: A measure of how "full" your service is, highlighting the most constrained resources (like CPU, memory, or thread pools) and indicating at what point performance will begin to degrade as the system reaches its maximum capacity.
+* **Saturation:** A measure of how full a service is, highlighting the most constrained resources (CPU, memory, or thread pools) and indicating at what point performance will begin to degrade as the system reaches its maximum capacity.
 
 ![Golden Signals](https://github.com/NF-D00M/DistributedLoggingStrategies/blob/master/LGTM/LgtmDistributedLogging/Images/golden-signals.png)
 
