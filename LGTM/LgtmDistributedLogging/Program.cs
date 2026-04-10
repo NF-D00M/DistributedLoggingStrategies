@@ -33,7 +33,7 @@ builder.Services.AddHttpClient("ServiceC", c => c.BaseAddress = new Uri("http://
 // OpenTelemetry Tracing & Metrics
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource
-        .AddService(serviceName, serviceInstanceId: serviceInstanceId)) // This fills the 'service_instance_id' label
+        .AddService(serviceName, serviceInstanceId: serviceInstanceId))
     .WithTracing(tracing => tracing
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
@@ -45,7 +45,7 @@ builder.Services.AddOpenTelemetry()
         }))
     .WithMetrics(static metrics => metrics
         .AddAspNetCoreInstrumentation() // Tracks request rates, errors, and durations
-        .AddHttpClientInstrumentation() // Tracks downstream calls (e.g. Orchestrator -> Service A)
+        .AddHttpClientInstrumentation() // Tracks downstream calls ( Orchestrator -> Service A)
         .AddRuntimeInstrumentation()    // Tracks .NET GC, Memory, and ThreadPool
         //.AddConsoleExporter()
         .AddOtlpExporter(opt => {

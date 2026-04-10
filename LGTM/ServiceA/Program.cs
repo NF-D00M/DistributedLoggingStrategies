@@ -28,7 +28,7 @@ builder.Host.UseSerilog();
 // OpenTelemetry Tracing & Metrics
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource
-        .AddService(serviceName, serviceInstanceId: serviceInstanceId)) // This fills the 'service_instance_id' label
+        .AddService(serviceName, serviceInstanceId: serviceInstanceId)) 
     .WithTracing(t => t
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation() 
